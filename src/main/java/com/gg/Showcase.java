@@ -3,8 +3,6 @@ package com.gg;
 import javax.swing.JFrame;
 
 /**
- * URLyBird main Swing frame.
- * 
  * THe frame contains all components visible in application such as search panel and the table.
  */
 
@@ -13,7 +11,7 @@ public class Showcase extends JFrame {
 	
 	public Showcase(){
 //		
-//		setTitle("URLyBird Booker");
+//		setTitle("URLyBird Booker"); 
 //				
 //		JMenu menu = new JMenu("Booker");
 //		
