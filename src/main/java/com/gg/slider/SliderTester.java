@@ -69,7 +69,7 @@ public class SliderTester extends JFrame{
 		model.add(1, "Steven Spielberg");
 		model.add(2, "Donald Trump");
 		model.add(3, "Steve Jobs");		
-		
+		 
 		JList<String> list = new JList<String>();
 		
 		list.setModel(model);
