@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
 
+import com.gg.slider.temp.SidebarAnimation;
+
 public class SidebarSection extends JPanel {
 
 	public static final int minComponentHeight = 60;
@@ -20,12 +22,14 @@ public class SidebarSection extends JPanel {
 	
 	private JPanel titlePanel = new JPanel();
 	private SideBar sideBarOwner;
-	private JComponent contentPane; //sidebar section's content
+	
+	public JComponent contentPane; //sidebar section's content
 	
 	public static int EXPAND_FULLY;
 	public static int EXPAND_MINIMALLY;
 	
 	private ArrowPanel arrowPanel;
+	private int calculatedHeight;
 
 	/**
 	 * Construct a new sidebar section with the specified owner and model. 
@@ -33,7 +37,11 @@ public class SidebarSection extends JPanel {
 	 * @param owner - SideBar
 	 * @param model
 	 */
-	public SidebarSection(SideBar owner, SidebarSectionModel model) {
+	public SidebarSection(SideBar owner, String text, String supplementaryText, JComponent component) {
+		
+		this.contentPane = component;
+		
+//		contentPane.getHeight()
 		
 		titlePanel.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
@@ -50,37 +58,32 @@ public class SidebarSection extends JPanel {
 		
 		add(titlePanel);
 
-		JLabel l1 = new JLabel(model.getText());
-		JLabel l2 = new JLabel(model.getSupplementaryText());
-
-		l1.setText(model.getText());
-		l2.setText(model.getSupplementaryText());
+		JLabel l1 = new JLabel(text);
+		JLabel l2 = new JLabel(supplementaryText);
 		l2.setFont(new Font("Ariel", Font.ITALIC, 12));
 
-		getTitlePanel().setLayout(new FlowLayout(FlowLayout.LEADING));
-		getTitlePanel().setPreferredSize(
-				new Dimension(this.getPreferredSize().width, SidebarSection.minComponentHeight));
-		getTitlePanel().setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		titlePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+		titlePanel.setPreferredSize(new Dimension(this.getPreferredSize().width, SidebarSection.minComponentHeight));
+		titlePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
 		arrowPanel = new ArrowPanel(BasicArrowButton.EAST);
-		
 		arrowPanel.setPreferredSize(new Dimension(SidebarSection.minComponentWidth,SidebarSection.minComponentHeight-10));
 		
 		//add into tab panel the arrow and labels.
-		getTitlePanel().add(arrowPanel);
-		getTitlePanel().add(l1);
-		getTitlePanel().add(l2);
+		titlePanel.add(arrowPanel);
+		titlePanel.add(l1);
+		titlePanel.add(l2);
 
-		contentPane = model.getSectionContent();
-		
 		//centering
-		if (model.getSectionContent() != null){
-			add(model.getSectionContent());//, BorderLayout.CENTER);
+		if (component != null){
+			add(component);//, BorderLayout.CENTER);
 		}
 		revalidate();
 		
-		setOwner(owner);
+		sideBarOwner = owner;
+		sideBarOwner.addSection(this);
 	}
+	
 	
 	public void setBounds(int x, int y, int w, int h) {
 		super.setBounds(x, y, w, h);
@@ -93,15 +96,7 @@ public class SidebarSection extends JPanel {
 			contentPane.setBounds(0, 0, 0, 0);
 	}
 	
-	public void setOwner(SideBar newOwner) {
-		if (newOwner == sideBarOwner)
-			return;
 
-		sideBarOwner = newOwner; // must be before newOwner.addSection() to avoid
-							// infinite recursion
-		if (newOwner != null)
-			newOwner.addSection(this); // add to new Side-bar
-	}
 
 	public void expand() {
 		
@@ -118,32 +113,75 @@ public class SidebarSection extends JPanel {
 				this.expand();
 			}
 		}
+		
+		calculatedHeight = -1;
+		
+
 						
 		if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MAXIMISE_CONTENT)){
-			setMaximumSize(new Dimension(Integer.MAX_VALUE,Integer.MAX_VALUE));
+			
+			calculatedHeight = Integer.MAX_VALUE;
+			
 		}else if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MINIMISE_CONTENT)){
-			setMaximumSize(new Dimension(Integer.MAX_VALUE,
-					SidebarSection.minComponentHeight+contentPane.getPreferredSize().height));//Integer.MAX_VALUE, Integer.MAX_VALUE));
+			
+			//component minimium height
+			int minHeight = SidebarSection.minComponentHeight + contentPane.getPreferredSize().height;
+
+			calculatedHeight = minHeight;
 		}
-		getContentPane().setVisible(true);
-		revalidate();
+		
+		
+		/**
+		 * ANIMATION BIT
+		 */
+		
+		SidebarAnimation anim = new SidebarAnimation(this, 1000);
+		
+		anim.setStartValue(SidebarSection.minComponentHeight);
+		anim.setEndValue(calculatedHeight);
+		anim.start();
+
+		/**
+		 * OLD BIT
+		 */
+		
+//		
+//		setMaximumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
+//		contentPane.setVisible(true);
+//		revalidate();
+		
+		
 	}
 	
 	public void collapse() {
 		arrowPanel.changeDirection(BasicArrowButton.EAST);
 		arrowPanel.updateUI();
 
-		setMaximumSize(new Dimension(Integer.MAX_VALUE, getTitlePanel().getPreferredSize().height));
-		getContentPane().setVisible(false);
-		revalidate();
+		
+		/**
+		 * ANIMATION BIT
+		 */
+		SidebarAnimation anim = new SidebarAnimation(this, 1000);
+		
+		anim.setStartValue(calculatedHeight);
+		anim.setEndValue(SidebarSection.minComponentHeight);
+		anim.start();
+		
+		/**
+		 * OLD BIT
+		 */
+		
+//		setMaximumSize(new Dimension(Integer.MAX_VALUE, getTitlePanel().getPreferredSize().height));
+//		getContentPane().setVisible(false);
+//		revalidate();
 	}
 
-	public JComponent getContentPane() {
-		return contentPane;
-	}
-	protected JPanel getTitlePanel() {
-		return titlePanel;
-	}
+//	public JComponent getContentPane() {
+//		return contentPane;
+//	}
+//	protected JPanel getTitlePanel() {
+//		return titlePanel;
+//	}
 	public Dimension getMinimumSize(){
 		return new Dimension(60,SidebarSection.minComponentHeight);
 	}
@@ -151,6 +189,6 @@ public class SidebarSection extends JPanel {
 		return new Dimension(60,SidebarSection.minComponentHeight);
 	}
 	public boolean isExpanded() {
-		return getContentPane().isVisible() && sideBarOwner.isCurrentSection(this);
+		return contentPane.isVisible() && sideBarOwner.isCurrentSection(this);
 	}
 }

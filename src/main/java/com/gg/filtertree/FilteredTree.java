@@ -17,10 +17,11 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
+ * 
  * Tree widget which allows the tree to be filtered on keystroke time. Only nodes who's 
  * toString matches the search field will remain in the tree or its parents.
  * 
- * Copyright (c) Oliver.Watkins
+ * @author Copyright (c) Oliver.Watkins
  */
 
 public class FilteredTree extends JPanel{

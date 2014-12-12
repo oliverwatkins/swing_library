@@ -1,5 +1,6 @@
 package com.gg.slider.temp;
 
+import java.awt.Dimension;
 import java.awt.Rectangle;
 
 import com.gg.slider.SidebarSection;
@@ -8,43 +9,32 @@ public class SidebarAnimation extends Animation{
 
 	private SidebarSection sideBarSection;
 	
-	public SidebarAnimation(SidebarSection sidebarSection) {
-		super(0, sidebarSection.getContentPane().getPreferredSize().height, 300);
+	public SidebarAnimation(SidebarSection sidebarSection, int durationMs) {
+		super(0, sidebarSection.contentPane.getHeight(), durationMs);
 		
-		System.out.println("sidebarSection.getContentPane().getSize().height =" + sidebarSection.getContentPane().getSize().height);
+		System.out.println("sidebarSection.getContentPane().getSize().height =" + sidebarSection.contentPane.getSize().height);
 		
 		this.sideBarSection = sidebarSection;
 	}
 
-	protected void render(int value) {
-		
-//		,0+value
-		
-		Rectangle r = new Rectangle(0,0,sideBarSection.getContentPane().getPreferredSize().width, 60+value);
-		
-		sideBarSection.getContentPane().setBounds(r);//setSize(new Dimension(sideBarSection.getContentPane().getPreferredSize().width,0+value));
-		
-//		sideBarSection.getContentPane().getParent().validate();
-		
-//		sideBarSection.getContentPane().setSize(new Dimension(sideBarSection.getContentPane().getPreferredSize().width,0+value));
-		
-		
-		// TODO Auto-generated method stub
+	public void starting () {
+		sideBarSection.contentPane.setVisible(true);
 	}
 	
-	public void starting () {
+	protected void render(int value) {
 		
-		sideBarSection.getContentPane().setVisible(true);
-//		searchRequestPanel.setVisible(true);
+		sideBarSection.setMaximumSize(new Dimension(Integer.MAX_VALUE, value));
+		
+		sideBarSection.contentPane.setVisible(true);
+		
+		sideBarSection.revalidate();
 	}
+
 
 	public void stopped () {
 		
-		sideBarSection.getContentPane().setVisible(true);
-//		
+		sideBarSection.contentPane.setVisible(true);
 		sideBarSection.revalidate();
-		
-//		searchRequestPanel.termsField.requestFocus();
 	}
 
 }

@@ -10,7 +10,6 @@ import javax.swing.Timer;
  * 
  * 
  * 
- * 
  */
 
 public abstract class Animation implements ActionListener {
@@ -156,6 +155,7 @@ public abstract class Animation implements ActionListener {
 
 	public void setStartValue(int startValue) {
 		this.startValue = startValue;
+		
 		if (durationMillis > 0) {
 			this.valuePerMilli = ((double)(endValue - startValue)) / ((double)durationMillis);
 		}

@@ -34,8 +34,8 @@ public class SideBar extends JPanel {
 	
 	public void addSection(SidebarSection newSection) {
 		add(newSection);
-		newSection.setOwner(this);
-		newSection.expand();
+		
+		newSection.expand(); //why expand here?
 	}
 	
 	public boolean isCurrentSection(SidebarSection section) {

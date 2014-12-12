@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
-public class Tester {
+public class ExpanderTester {
 
 	public static void main(String[] args){
 		
@@ -19,9 +19,20 @@ public class Tester {
 		
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(700, 700);
+		
+		
+		frame.setVisible(true);
+		
+		frame.getContentPane().add(getPanel());
+		
+	}
+	
+	public static JPanel getPanel() {
+		
+		
 		JPanel p = new JPanel();
 		
-		frame.getContentPane().add(p);
+		
 		
 		p.setLayout(new GridBagLayout());
 		
@@ -73,7 +84,9 @@ public class Tester {
 		JTextArea ta = new JTextArea(5,5);
 		ta.setLineWrap(true);
 		
-		frame.setVisible(true);
+		return p;
+		
+		
 	}
 	
 }
