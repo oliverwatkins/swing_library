@@ -63,6 +63,8 @@ public class SliderTester extends JFrame{
 		SidebarSection ss2 = new SidebarSection(sideBar, "Thinkers", "JTable", table);
 		sideBar.addSection(ss2);
 
+		
+		//test
 
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		model.add(0, "Bill Gates");
