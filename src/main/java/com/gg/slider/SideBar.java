@@ -40,7 +40,7 @@ public class SideBar extends JPanel {
 //		newSection.expand(); //why expand here?
 	}
 	
-	public boolean isCurrentSection(SidebarSection section) {
+	public boolean isCurrentExpandedSection(SidebarSection section) {
 		return (section != null) && (currentSection != null)
 				&& section.equals(currentSection);
 	}
@@ -59,5 +59,9 @@ public class SideBar extends JPanel {
 	
 	public enum SideBarMode {
 		MAXIMISE_CONTENT, MINIMISE_CONTENT;
+	}
+
+	public void removeExpanded() {
+		currentSection.collapse(true);
 	}
 }

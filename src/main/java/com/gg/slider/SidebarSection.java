@@ -49,11 +49,19 @@ public class SidebarSection extends JPanel {
 		
 		titlePanel.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
+
+//				System.out.println("SidebarSection.this " + SidebarSection.this.hashCode());
+//				System.out.println("sideBarOwner.getCurrentSection() " + sideBarOwner.getCurrentSection().hashCode());
 				
-				if (!isExpanded())
-					expand();
-				else
+				if (SidebarSection.this != sideBarOwner.getCurrentSection()) {
+					if (sideBarOwner.getCurrentSection() != null)
+						sideBarOwner.getCurrentSection().collapse(true);
+					
+					expand(); //expand this!
+				}
+				else {
 					collapse(true);
+				}
 			}
 		});
 
@@ -107,29 +115,25 @@ public class SidebarSection extends JPanel {
 	public void expand() {
 		
 		
+		sideBarOwner.setCurrentSection(this);
+		
+		
 		System.out.println("Expanding ..!");
 		
 		arrowPanel.changeDirection(BasicArrowButton.SOUTH);
 		arrowPanel.updateUI();
 		
-		if (this != sideBarOwner.getCurrentSection()){
-
-			if ((sideBarOwner.getCurrentSection() != null) && (this != null))
-				sideBarOwner.getCurrentSection().collapse(true);
-			if (this != null) {
-				sideBarOwner.setCurrentSection(this); // must be called before section.expand()
-											// to avoid recursion
-				this.expand();
-			}
-		}
+		
 		
 		calculatedHeight = -1;
-		
 
-						
 		if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MAXIMISE_CONTENT)){
 			
-			calculatedHeight = Integer.MAX_VALUE;
+//			calculatedHeight = titlePanel.getPreferredSize().height + contentPane.getPreferredSize().height; //Integer.MAX_VALUE;
+			
+			
+
+			calculatedHeight = 800; //sideBarOwner.getMaximumSize().height;
 			
 		}else if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MINIMISE_CONTENT)){
 			
@@ -140,10 +144,13 @@ public class SidebarSection extends JPanel {
 		}
 		
 		
+		
+		System.out.println("sidebarSection.contentPane.getHeight() " + contentPane.getHeight());
+		
+		
 		/**
 		 * ANIMATION BIT
 		 */
-		
 		SidebarAnimation anim = new SidebarAnimation(this, 1000);
 		
 		anim.setStartValue(SidebarSection.minComponentHeight);
@@ -165,6 +172,10 @@ public class SidebarSection extends JPanel {
 	public void collapse(boolean animate) {
 		
 		System.out.println("Collapsing ..!");
+		
+		//remove reference
+		if (sideBarOwner.getCurrentSection() == SidebarSection.this)
+			sideBarOwner.setCurrentSection(null);
 
 		
 		arrowPanel.changeDirection(BasicArrowButton.EAST);
@@ -196,19 +207,12 @@ public class SidebarSection extends JPanel {
 //		revalidate();
 	}
 
-//	public JComponent getContentPane() {
-//		return contentPane;
-//	}
-//	protected JPanel getTitlePanel() {
-//		return titlePanel;
-//	}
 	public Dimension getMinimumSize(){
 		return new Dimension(60,SidebarSection.minComponentHeight);
 	}
+	
 	public Dimension getPreferredSize(){
 		return new Dimension(60,SidebarSection.minComponentHeight);
 	}
-	public boolean isExpanded() {
-		return contentPane.isVisible() && sideBarOwner.isCurrentSection(this);
-	}
+	
 }

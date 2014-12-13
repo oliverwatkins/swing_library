@@ -8,7 +8,12 @@ public class SidebarAnimation extends Animation{
 	private SidebarSection sideBarSection;
 	
 	public SidebarAnimation(SidebarSection sidebarSection, int durationMs) {
-		super(0, sidebarSection.contentPane.getHeight(), durationMs);
+		
+		super(durationMs);
+		
+//		super(0, sidebarSection.contentPane.getHeight(), durationMs);
+		
+		
 		
 //		System.out.println("sidebarSection.getContentPane().getSize().height =" + sidebarSection.contentPane.getSize().height);
 		
@@ -20,6 +25,9 @@ public class SidebarAnimation extends Animation{
 	}
 	
 	protected void render(int value) {
+		
+		
+//		System.out.println("render with value : " + value);
 		
 		sideBarSection.setMaximumSize(new Dimension(Integer.MAX_VALUE, value));
 		

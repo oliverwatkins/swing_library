@@ -63,6 +63,10 @@ public abstract class Animation implements ActionListener {
 		this.valuePerMilli = valuePerMilli;
 	}
 
+	public Animation(int durationMs) {
+		this.durationMillis = durationMs;
+	}
+
 	public void actionPerformed(ActionEvent arg0) {
 
 		
