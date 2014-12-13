@@ -13,7 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
 
-import com.gg.slider.temp.SidebarAnimation;
+/**
+ * Panel that contains both the title/header part and the content part.
+ * 
+ * @author oliver
+ *
+ */
 
 public class SidebarSection extends JPanel {
 
@@ -21,14 +26,13 @@ public class SidebarSection extends JPanel {
 	public static final int minComponentWidth = 50;
 	
 	private JPanel titlePanel = new JPanel();
+	
 	private SideBar sideBarOwner;
 	
 	public JComponent contentPane; //sidebar section's content
 	
-	public static int EXPAND_FULLY;
-	public static int EXPAND_MINIMALLY;
-	
 	private ArrowPanel arrowPanel;
+	
 	private int calculatedHeight;
 
 	/**
@@ -41,7 +45,7 @@ public class SidebarSection extends JPanel {
 		
 		this.contentPane = component;
 		
-//		contentPane.getHeight()
+		sideBarOwner = owner;
 		
 		titlePanel.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
@@ -49,7 +53,7 @@ public class SidebarSection extends JPanel {
 				if (!isExpanded())
 					expand();
 				else
-					collapse();
+					collapse(true);
 			}
 		});
 
@@ -67,23 +71,25 @@ public class SidebarSection extends JPanel {
 		titlePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
 		arrowPanel = new ArrowPanel(BasicArrowButton.EAST);
-		arrowPanel.setPreferredSize(new Dimension(SidebarSection.minComponentWidth,SidebarSection.minComponentHeight-10));
+		arrowPanel.setPreferredSize(new Dimension(SidebarSection.minComponentWidth, SidebarSection.minComponentHeight-10));
 		
 		//add into tab panel the arrow and labels.
 		titlePanel.add(arrowPanel);
 		titlePanel.add(l1);
 		titlePanel.add(l2);
 
-		//centering
-		if (component != null){
-			add(component);//, BorderLayout.CENTER);
-		}
+//		component.setPreferredSize(new Dimension(0,0));
+		
+		add(component);//, BorderLayout.CENTER);
+		
 		revalidate();
 		
-		sideBarOwner = owner;
-		sideBarOwner.addSection(this);
+		
 	}
 	
+	/**
+	 * Overrides super.
+	 */
 	
 	public void setBounds(int x, int y, int w, int h) {
 		super.setBounds(x, y, w, h);
@@ -100,13 +106,16 @@ public class SidebarSection extends JPanel {
 
 	public void expand() {
 		
+		
+		System.out.println("Expanding ..!");
+		
 		arrowPanel.changeDirection(BasicArrowButton.SOUTH);
 		arrowPanel.updateUI();
 		
 		if (this != sideBarOwner.getCurrentSection()){
 
 			if ((sideBarOwner.getCurrentSection() != null) && (this != null))
-				sideBarOwner.getCurrentSection().collapse();
+				sideBarOwner.getCurrentSection().collapse(true);
 			if (this != null) {
 				sideBarOwner.setCurrentSection(this); // must be called before section.expand()
 											// to avoid recursion
@@ -153,7 +162,11 @@ public class SidebarSection extends JPanel {
 		
 	}
 	
-	public void collapse() {
+	public void collapse(boolean animate) {
+		
+		System.out.println("Collapsing ..!");
+
+		
 		arrowPanel.changeDirection(BasicArrowButton.EAST);
 		arrowPanel.updateUI();
 
@@ -163,9 +176,16 @@ public class SidebarSection extends JPanel {
 		 */
 		SidebarAnimation anim = new SidebarAnimation(this, 1000);
 		
-		anim.setStartValue(calculatedHeight);
-		anim.setEndValue(SidebarSection.minComponentHeight);
-		anim.start();
+		if (animate) {
+			anim.setStartValue(calculatedHeight);
+			anim.setEndValue(SidebarSection.minComponentHeight);
+			anim.start();
+		}else {
+			setMaximumSize(new Dimension(Integer.MAX_VALUE, titlePanel.getPreferredSize().height));
+			contentPane.setVisible(false);
+			revalidate();
+		}
+		
 		
 		/**
 		 * OLD BIT

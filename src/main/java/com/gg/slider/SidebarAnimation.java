@@ -1,9 +1,7 @@
-package com.gg.slider.temp;
+package com.gg.slider;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-
-import com.gg.slider.SidebarSection;
 
 public class SidebarAnimation extends Animation{
 
@@ -12,7 +10,7 @@ public class SidebarAnimation extends Animation{
 	public SidebarAnimation(SidebarSection sidebarSection, int durationMs) {
 		super(0, sidebarSection.contentPane.getHeight(), durationMs);
 		
-		System.out.println("sidebarSection.getContentPane().getSize().height =" + sidebarSection.contentPane.getSize().height);
+//		System.out.println("sidebarSection.getContentPane().getSize().height =" + sidebarSection.contentPane.getSize().height);
 		
 		this.sideBarSection = sidebarSection;
 	}

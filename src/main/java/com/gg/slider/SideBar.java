@@ -35,7 +35,9 @@ public class SideBar extends JPanel {
 	public void addSection(SidebarSection newSection) {
 		add(newSection);
 		
-		newSection.expand(); //why expand here?
+		newSection.collapse(false);
+		
+//		newSection.expand(); //why expand here?
 	}
 	
 	public boolean isCurrentSection(SidebarSection section) {

@@ -1,4 +1,4 @@
-package com.gg.slider.temp;
+package com.gg.slider;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -77,7 +77,7 @@ public abstract class Animation implements ActionListener {
 		 */
 		double i = (double)(millisPassed * valuePerMilli);
 		if (i==0)
-			System.out.println("WARNING: Animation is incrementing by zero... potential infinite loop");
+			System.err.println("WARNING: Animation is incrementing by zero... potential infinite loop");
 //			throw new RuntimeException("CRITICAL ERROR : Animation broken : incrementing by zero... so infinite loop");
 		
 		value += i;

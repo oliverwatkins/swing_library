@@ -42,7 +42,7 @@ public class SliderTester extends JFrame{
 		
 		JPanel listPanel = new JPanel(new BorderLayout());
 		
-		SideBar sideBar = new SideBar(SideBar.SideBarMode.MINIMISE_CONTENT);
+		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT);
 
 		JTree tree = new JTree();
 		
