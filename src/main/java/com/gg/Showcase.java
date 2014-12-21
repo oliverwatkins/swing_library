@@ -12,6 +12,7 @@ import com.gg.calculation.CalculationTester;
 import com.gg.expander.ExpanderTester;
 import com.gg.filtertree.FilterTreeTester;
 import com.gg.slider.SliderTester;
+import com.gg.tabledialog.DialogTableTester;
 
 /**
  * THe frame contains all components visible in application such as search panel
@@ -71,7 +72,7 @@ public class Showcase extends JFrame {
 
 		tabbedPane.add("Calculation", CalculationTester.getPanel());
 		
-		tabbedPane.add("Table Dialog", CalculationTester.getPanel());
+		tabbedPane.add("Table Dialog", DialogTableTester.getPanel());
 		
 
 		this.add(tabbedPane);
