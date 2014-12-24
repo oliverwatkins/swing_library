@@ -3,6 +3,8 @@ package com.gg.slider;
 import java.awt.BorderLayout;
 
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -10,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTree;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -42,12 +43,14 @@ public class SliderTester extends JFrame{
 		
 		JPanel listPanel = new JPanel(new BorderLayout());
 		
-		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT);
+		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT, false);
 
 		JTree tree = new JTree();
 		
+		Icon i1 = new ImageIcon("src/main/resource/img/Calendar/Calendar_24x24.png");
+		
 //		SidebarSectionModel m1 = new SidebarSectionModel("Colours", tree, "JTree");
-		SidebarSection ss1 = new SidebarSection(sideBar, "Colours", "JTree", tree);
+		SidebarSection ss1 = new SidebarSection(sideBar, "Calendars", "JTree", tree, i1);
 		sideBar.addSection(ss1);
 
 		
@@ -58,9 +61,11 @@ public class SliderTester extends JFrame{
 		
 		JTable table = new JTable(tModel);
 		
-		
+
+		Icon i2 = new ImageIcon("src/main/resource/img/Mail/Mail_24x24.png");
+
 //		SidebarSectionModel m2 = new SidebarSectionModel("Thinkers", table, "JTable");
-		SidebarSection ss2 = new SidebarSection(sideBar, "Thinkers", "JTable", table);
+		SidebarSection ss2 = new SidebarSection(sideBar, "Thinkers", "JTable", table, i2);
 		sideBar.addSection(ss2);
 
 		
@@ -75,9 +80,12 @@ public class SliderTester extends JFrame{
 		JList<String> list = new JList<String>();
 		
 		list.setModel(model);
+
+		Icon i3 = new ImageIcon("src/main/resource/img/Globe/Globe_24x24.png");
+
 		
 //		SidebarSectionModel m3 = new SidebarSectionModel("Dealers", list, "JList");
-		SidebarSection ss3 = new SidebarSection(sideBar, "Dealers", "JList", list);
+		SidebarSection ss3 = new SidebarSection(sideBar, "Logistics Partners", "JList", list, i3);
 		sideBar.addSection(ss3);
 		
 		listPanel.add(sideBar, BorderLayout.WEST);

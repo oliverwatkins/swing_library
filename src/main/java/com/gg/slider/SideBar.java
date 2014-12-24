@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class SideBar extends JPanel {
 	
 	//The preferred initial width of the side bar 
-	private static int PREFERRED_WIDTH = 200;
+	private static int PREFERRED_WIDTH = 300;
 	
 	// box layout to contain side bar sections arranged vertically
 	private BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -17,13 +17,16 @@ public class SideBar extends JPanel {
 	private SidebarSection currentSection = null;
 
 	private SideBarMode thisMode;
-	
-	public SideBar(SideBarMode mode) {
-		
+
+	boolean showArrow;
+
+	public SideBar(SideBarMode mode, boolean showArrow) {
+
+		this.showArrow = showArrow;
 		this.thisMode = mode;
 		
 		setLayout(boxLayout);
-		setMinimumSize(new Dimension(0, 0));
+//		setMinimumSize(new Dimension(0, 0));
 		setPreferredSize(new Dimension(PREFERRED_WIDTH, 1));
 		setFocusable(false);
 		
@@ -36,8 +39,6 @@ public class SideBar extends JPanel {
 		add(newSection);
 		
 		newSection.collapse(false);
-		
-//		newSection.expand(); //why expand here?
 	}
 	
 	public boolean isCurrentExpandedSection(SidebarSection section) {

@@ -25,7 +25,8 @@ public class ArrowPanel extends JPanel implements SwingConstants{
 	private Color highlight;
 
 	public ArrowPanel(int direction) {
-		this(direction, UIManager.getColor("control"), UIManager
+		this(direction, UIManager.getColor("control"), 
+				UIManager
 				.getColor("controlShadow"), UIManager
 				.getColor("controlDkShadow"), UIManager
 				.getColor("controlLtHighlight"));
