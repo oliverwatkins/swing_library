@@ -14,6 +14,8 @@ import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
 
+import com.gg.slider.SideBar.SideBarMode;
+
 
 public class SliderTester extends JFrame{
 	
@@ -43,7 +45,7 @@ public class SliderTester extends JFrame{
 		
 		JPanel listPanel = new JPanel(new BorderLayout());
 		
-		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT, false);
+		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT, false, 300);
 
 		JTree tree = new JTree();
 		
@@ -60,12 +62,23 @@ public class SliderTester extends JFrame{
 		tModel.setValueAt("Nietsche", 2, 0);
 		
 		JTable table = new JTable(tModel);
+
+//		SideBar innerSideBar = new SideBar(SideBarMode.MAXIMISE_CONTENT, false);
+		SideBar innerSideBar = new SideBar(SideBarMode.MAXIMISE_CONTENT, false, -1);
+		
+		
+		
+		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XX"), i1));
+		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XXX"), i1));
+		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XXXXX"), i1));
+		
+		innerSideBar.add(new JLabel("asdf"));
 		
 
 		Icon i2 = new ImageIcon("src/main/resource/img/Mail/Mail_24x24.png");
 
 //		SidebarSectionModel m2 = new SidebarSectionModel("Thinkers", table, "JTable");
-		SidebarSection ss2 = new SidebarSection(sideBar, "Thinkers", "JTable", table, i2);
+		SidebarSection ss2 = new SidebarSection(sideBar, "Mail Groups", "JTable", innerSideBar, i2);
 		sideBar.addSection(ss2);
 
 		

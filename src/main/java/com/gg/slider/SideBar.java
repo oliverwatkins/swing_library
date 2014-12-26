@@ -1,5 +1,6 @@
 package com.gg.slider;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
@@ -20,14 +21,26 @@ public class SideBar extends JPanel {
 
 	boolean showArrow;
 
-	public SideBar(SideBarMode mode, boolean showArrow) {
+	public SideBar() {
+		setPreferredSize(new Dimension(PREFERRED_WIDTH, 1));
+		revalidate();
+		
+	}
+
+	
+	public SideBar(SideBarMode mode, boolean showArrow, int preferredWidth) {
 
 		this.showArrow = showArrow;
 		this.thisMode = mode;
 		
+		
+		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 		setLayout(boxLayout);
 //		setMinimumSize(new Dimension(0, 0));
-		setPreferredSize(new Dimension(PREFERRED_WIDTH, 1));
+		if (preferredWidth != -1)
+			setPreferredSize(new Dimension(preferredWidth, 1));
+		
 		setFocusable(false);
 		
 		// collapse all sections

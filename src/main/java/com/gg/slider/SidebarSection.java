@@ -133,9 +133,7 @@ public class SidebarSection extends JPanel {
 
 		if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MAXIMISE_CONTENT)){
 			
-//			calculatedHeight = titlePanel.getPreferredSize().height + contentPane.getPreferredSize().height; //Integer.MAX_VALUE;
-
-			calculatedHeight = 800; //sideBarOwner.getMaximumSize().height;
+			calculatedHeight = sideBarOwner.getSize().height;
 			
 		}else if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MINIMISE_CONTENT)){
 			
@@ -153,22 +151,12 @@ public class SidebarSection extends JPanel {
 		/**
 		 * ANIMATION BIT
 		 */
-		SidebarAnimation anim = new SidebarAnimation(this, 1000);
+		SidebarAnimation anim = new SidebarAnimation(this, 200);
 		
 		anim.setStartValue(SidebarSection.minComponentHeight);
 		anim.setEndValue(calculatedHeight);
 		anim.start();
 
-		/**
-		 * OLD BIT
-		 */
-		
-//		
-//		setMaximumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-//		contentPane.setVisible(true);
-//		revalidate();
-		
-		
 	}
 	
 	public void collapse(boolean animate) {
@@ -187,7 +175,7 @@ public class SidebarSection extends JPanel {
 		/**
 		 * ANIMATION BIT
 		 */
-		SidebarAnimation anim = new SidebarAnimation(this, 1000);
+		SidebarAnimation anim = new SidebarAnimation(this, 200);
 		
 		if (animate) {
 			anim.setStartValue(calculatedHeight);
@@ -198,15 +186,6 @@ public class SidebarSection extends JPanel {
 			contentPane.setVisible(false);
 			revalidate();
 		}
-		
-		
-		/**
-		 * OLD BIT
-		 */
-		
-//		setMaximumSize(new Dimension(Integer.MAX_VALUE, getTitlePanel().getPreferredSize().height));
-//		getContentPane().setVisible(false);
-//		revalidate();
 	}
 
 	public Dimension getMinimumSize(){
