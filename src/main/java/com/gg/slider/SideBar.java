@@ -21,17 +21,16 @@ public class SideBar extends JPanel {
 
 	boolean showArrow;
 
-	public SideBar() {
-		setPreferredSize(new Dimension(PREFERRED_WIDTH, 1));
-		revalidate();
-		
-	}
-
+	boolean animate = false;
+	boolean innerSideBar = false;
 	
-	public SideBar(SideBarMode mode, boolean showArrow, int preferredWidth) {
+	public SideBar(SideBarMode mode, boolean showArrow, int preferredWidth, boolean animate, boolean innerSideBar) {
 
 		this.showArrow = showArrow;
 		this.thisMode = mode;
+		this.animate = animate;
+		
+		this.innerSideBar = innerSideBar;
 		
 		
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));

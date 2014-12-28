@@ -1,7 +1,9 @@
 package com.gg.slider;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -45,7 +47,7 @@ public class SliderTester extends JFrame{
 		
 		JPanel listPanel = new JPanel(new BorderLayout());
 		
-		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT, false, 300);
+		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT, false, 300, false, false);
 
 		JTree tree = new JTree();
 		
@@ -64,15 +66,17 @@ public class SliderTester extends JFrame{
 		JTable table = new JTable(tModel);
 
 //		SideBar innerSideBar = new SideBar(SideBarMode.MAXIMISE_CONTENT, false);
-		SideBar innerSideBar = new SideBar(SideBarMode.MAXIMISE_CONTENT, false, -1);
+		SideBar innerSideBar = new SideBar(SideBarMode.MAXIMISE_CONTENT, true, -1, false, true);
 		
 		
 		
 		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XX"), i1));
 		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XXX"), i1));
-		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XXXXX"), i1));
+		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JTree(), i1));
 		
-		innerSideBar.add(new JLabel("asdf"));
+		innerSideBar.setBorder(BorderFactory.createLineBorder(Color.RED));
+		
+//		innerSideBar.add(new JLabel("asdf"));
 		
 
 		Icon i2 = new ImageIcon("src/main/resource/img/Mail/Mail_24x24.png");
