@@ -7,6 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -47,7 +48,7 @@ public class SliderTester extends JFrame{
 		
 		JPanel listPanel = new JPanel(new BorderLayout());
 		
-		SideBar sideBar = new SideBar(SideBar.SideBarMode.MAXIMISE_CONTENT, false, 300, false, false);
+		SideBar sideBar = new SideBar(SideBar.SideBarMode.TOP_LEVEL, true, 300, true);
 
 		JTree tree = new JTree();
 		
@@ -65,26 +66,18 @@ public class SliderTester extends JFrame{
 		
 		JTable table = new JTable(tModel);
 
-//		SideBar innerSideBar = new SideBar(SideBarMode.MAXIMISE_CONTENT, false);
-		SideBar innerSideBar = new SideBar(SideBarMode.MAXIMISE_CONTENT, true, -1, false, true);
+		SideBar innerSideBar = new SideBar(SideBarMode.INNER_LEVEL, false, -1, true);
 		
-		
-		
-		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XX"), i1));
-		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JLabel("XXX"), i1));
-		innerSideBar.add(new SidebarSection(innerSideBar, "Calendars", "JTree", new JTree(), i1));
-		
-		innerSideBar.setBorder(BorderFactory.createLineBorder(Color.RED));
-		
-//		innerSideBar.add(new JLabel("asdf"));
-		
-
 		Icon i2 = new ImageIcon("src/main/resource/img/Mail/Mail_24x24.png");
 
-//		SidebarSectionModel m2 = new SidebarSectionModel("Thinkers", table, "JTable");
+		Icon smallMailIcon = new ImageIcon("src/main/resource/img/Mail/Mail_16x16.png");
+
+		innerSideBar.add(new SidebarSection(innerSideBar, "American Partners", "JTree", getInner1(), smallMailIcon));
+		innerSideBar.add(new SidebarSection(innerSideBar, "Internal", "JTree", getInner2(), smallMailIcon));
+		innerSideBar.add(new SidebarSection(innerSideBar, "Promotions", "JTree", getInner3(), smallMailIcon));
+		
 		SidebarSection ss2 = new SidebarSection(sideBar, "Mail Groups", "JTable", innerSideBar, i2);
 		sideBar.addSection(ss2);
-
 		
 		//test
 
@@ -100,18 +93,50 @@ public class SliderTester extends JFrame{
 
 		Icon i3 = new ImageIcon("src/main/resource/img/Globe/Globe_24x24.png");
 
-		
-//		SidebarSectionModel m3 = new SidebarSectionModel("Dealers", list, "JList");
 		SidebarSection ss3 = new SidebarSection(sideBar, "Logistics Partners", "JList", list, i3);
 		sideBar.addSection(ss3);
 		
 		listPanel.add(sideBar, BorderLayout.WEST);
 		listPanel.add(new JLabel("<html><body><h1>central panel</html>", JLabel.CENTER));
 		
-		
 		tabbedPane.add("Slider Bar", listPanel);
 		
 		p.add(tabbedPane);
 		return p;
+	}
+
+
+	private static JComponent getInner2() {
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		model.add(0, "Bill Gates");
+		model.add(1, "Steven Spielberg");
+		model.add(2, "Donald Trump");
+		model.add(3, "Steve Jobs");		
+		 
+		JList<String> list = new JList<String>();
+		
+		list.setModel(model);
+		return list;
+	}
+	
+	private static JComponent getInner1() {
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		model.add(0, "Bill Gates");
+		model.add(1, "Steven Spielberg");
+		 
+		JList<String> list = new JList<String>();
+		
+		list.setModel(model);
+		return list;
+	}
+
+	private static JComponent getInner3() {
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		model.add(0, "Steve Jobs");		
+		 
+		JList<String> list = new JList<String>();
+		
+		list.setModel(model);
+		return list;
 	}
 }

@@ -1,10 +1,8 @@
 package com.gg.slider;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,7 +11,10 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
+
+import com.gg.slider.SideBar.SideBarMode;
 
 /**
  * Panel that contains both the title/header part and the content part.
@@ -24,8 +25,8 @@ import javax.swing.plaf.basic.BasicArrowButton;
 
 public class SidebarSection extends JPanel {
 
-	public static final int minComponentHeight = 40;
-	public static final int minComponentWidth = 350;
+	public int minComponentHeight = 40;
+	public int minComponentWidth = 350;
 	
 	public JPanel titlePanel = new JPanel();
 	
@@ -47,6 +48,12 @@ public class SidebarSection extends JPanel {
 			String text, 
 			String supplementaryText, 
 			JComponent component, Icon icon) {
+		
+		if (owner.thisMode == SideBar.SideBarMode.INNER_LEVEL)
+			minComponentHeight = 30;
+		else
+			minComponentHeight = 40;
+		
 		
 		this.contentPane = component;
 		
@@ -73,24 +80,24 @@ public class SidebarSection extends JPanel {
 		
 		add(titlePanel, BorderLayout.NORTH);
 
-		JLabel l1 = new JLabel(text);
-
-		titlePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
-		titlePanel.setPreferredSize(new Dimension(this.getPreferredSize().width, SidebarSection.minComponentHeight));
-		titlePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		JLabel sidebarLabel = new JLabel(text);
+		sidebarLabel.setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 2));
+		titlePanel.setLayout(new BorderLayout());
+		titlePanel.setPreferredSize(new Dimension(this.getPreferredSize().width, minComponentHeight));
+		titlePanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
 		arrowPanel = new ArrowPanel(BasicArrowButton.EAST);
-		arrowPanel.setPreferredSize(new Dimension(SidebarSection.minComponentWidth, SidebarSection.minComponentHeight-10));
+		arrowPanel.setPreferredSize(new Dimension(40, 40));
 		
 		
 		if (sideBarOwner.showArrow)
 			//add into tab panel the arrow and labels.
-			titlePanel.add(arrowPanel);
+			titlePanel.add(arrowPanel, BorderLayout.EAST);
 		
 		
-		titlePanel.add(new JLabel(icon));
+		titlePanel.add(new JLabel(icon), BorderLayout.WEST);
 		
-		titlePanel.add(l1);
+		titlePanel.add(sidebarLabel);
 
 		this.setMinimumSize(new Dimension(minComponentWidth, minComponentHeight));
 //		component.setPreferredSize(new Dimension(0,0));
@@ -107,10 +114,10 @@ public class SidebarSection extends JPanel {
 	public void setBounds(int x, int y, int w, int h) {
 		super.setBounds(x, y, w, h);
 		
-		titlePanel.setBounds(0, 0, w, SidebarSection.minComponentHeight);
+		titlePanel.setBounds(0, 0, w, minComponentHeight);
 		
 		if (contentPane.isVisible())
-			contentPane.setBounds(0, SidebarSection.minComponentHeight, w, contentPane.getPreferredSize().height);
+			contentPane.setBounds(0, minComponentHeight, w, contentPane.getPreferredSize().height);
 		else
 			contentPane.setBounds(0, 0, 0, 0);
 	}
@@ -128,25 +135,9 @@ public class SidebarSection extends JPanel {
 		
 		
 		calculatedHeight = -1;
-
-		if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MAXIMISE_CONTENT)){
-			
-			calculatedHeight = sideBarOwner.getSize().height;
-			
-		}else if (sideBarOwner.getMode().equals(SideBar.SideBarMode.MINIMISE_CONTENT)){
-			
-			//component minimium height
-			int minHeight = SidebarSection.minComponentHeight + contentPane.getPreferredSize().height;
-
-			calculatedHeight = minHeight;
-		}
-		
-		
+		calculatedHeight = sideBarOwner.getSize().height;
 		
 		System.out.println("sidebarSection.contentPane.getHeight() " + contentPane.getHeight());
-		
-		
-
 		
 		if (this.sideBarOwner.animate) {
 			/**
@@ -154,12 +145,12 @@ public class SidebarSection extends JPanel {
 			 */
 			SidebarAnimation anim = new SidebarAnimation(this, 200);
 			
-			anim.setStartValue(SidebarSection.minComponentHeight);
+			anim.setStartValue(minComponentHeight);
 			anim.setEndValue(calculatedHeight);
 			anim.start();
 		}else {
 			
-			if (sideBarOwner.innerSideBar) {
+			if (sideBarOwner.thisMode == SideBarMode.INNER_LEVEL) {
 				calculatedHeight = 1000;
 				setMaximumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
 				setPreferredSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
@@ -220,7 +211,7 @@ public class SidebarSection extends JPanel {
 		
 		if (animate && this.sideBarOwner.animate) {
 			anim.setStartValue(calculatedHeight);
-			anim.setEndValue(SidebarSection.minComponentHeight);
+			anim.setEndValue(minComponentHeight);
 			anim.start();
 		}else {
 			setMaximumSize(new Dimension(Integer.MAX_VALUE, titlePanel.getPreferredSize().height));
@@ -231,11 +222,11 @@ public class SidebarSection extends JPanel {
 	}
 
 	public Dimension getMinimumSize(){
-		return new Dimension(60,SidebarSection.minComponentHeight);
+		return new Dimension(60,minComponentHeight);
 	}
 	
 	public Dimension getPreferredSize(){
-		return new Dimension(60,SidebarSection.minComponentHeight);
+		return new Dimension(60,minComponentHeight);
 	}
 	
 	public void printDimensions() {

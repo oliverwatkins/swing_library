@@ -17,20 +17,17 @@ public class SideBar extends JPanel {
 	// the currently expanded section 
 	private SidebarSection currentSection = null;
 
-	private SideBarMode thisMode;
+	SideBarMode thisMode;
 
 	boolean showArrow;
 
 	boolean animate = false;
-	boolean innerSideBar = false;
 	
-	public SideBar(SideBarMode mode, boolean showArrow, int preferredWidth, boolean animate, boolean innerSideBar) {
+	public SideBar(SideBarMode mode, boolean showArrow, int preferredWidth, boolean animate) {
 
 		this.showArrow = showArrow;
 		this.thisMode = mode;
 		this.animate = animate;
-		
-		this.innerSideBar = innerSideBar;
 		
 		
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -71,7 +68,7 @@ public class SideBar extends JPanel {
 	}
 	
 	public enum SideBarMode {
-		MAXIMISE_CONTENT, MINIMISE_CONTENT;
+		TOP_LEVEL, INNER_LEVEL;
 	}
 
 	public void removeExpanded() {
