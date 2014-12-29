@@ -36,6 +36,9 @@ public class SideBar extends JPanel {
 //		setMinimumSize(new Dimension(0, 0));
 		if (preferredWidth != -1)
 			setPreferredSize(new Dimension(preferredWidth, 1));
+		else
+			setPreferredSize(new Dimension(preferredWidth, 10));
+		
 		
 		setFocusable(false);
 		
@@ -71,7 +74,4 @@ public class SideBar extends JPanel {
 		TOP_LEVEL, INNER_LEVEL;
 	}
 
-	public void removeExpanded() {
-		currentSection.collapse(true);
-	}
 }

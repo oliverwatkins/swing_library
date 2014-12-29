@@ -48,13 +48,12 @@ public class SliderTester extends JFrame{
 		
 		JPanel listPanel = new JPanel(new BorderLayout());
 		
-		SideBar sideBar = new SideBar(SideBar.SideBarMode.TOP_LEVEL, true, 300, true);
+		SideBar sideBar = new SideBar(SideBar.SideBarMode.TOP_LEVEL, true, 300, false);
 
 		JTree tree = new JTree();
 		
 		Icon i1 = new ImageIcon("src/main/resource/img/Calendar/Calendar_24x24.png");
 		
-//		SidebarSectionModel m1 = new SidebarSectionModel("Colours", tree, "JTree");
 		SidebarSection ss1 = new SidebarSection(sideBar, "Calendars", "JTree", tree, i1);
 		sideBar.addSection(ss1);
 
@@ -66,7 +65,7 @@ public class SliderTester extends JFrame{
 		
 		JTable table = new JTable(tModel);
 
-		SideBar innerSideBar = new SideBar(SideBarMode.INNER_LEVEL, false, -1, true);
+		SideBar innerSideBar = new SideBar(SideBarMode.INNER_LEVEL, true, -1, false);
 		
 		Icon i2 = new ImageIcon("src/main/resource/img/Mail/Mail_24x24.png");
 

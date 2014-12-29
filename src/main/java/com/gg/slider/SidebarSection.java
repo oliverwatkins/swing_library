@@ -152,27 +152,29 @@ public class SidebarSection extends JPanel {
 			
 			if (sideBarOwner.thisMode == SideBarMode.INNER_LEVEL) {
 				calculatedHeight = 1000;
-				setMaximumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-				setPreferredSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-				setMinimumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
 				
-				sideBarOwner.setPreferredSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
+				Dimension d = new Dimension(Integer.MAX_VALUE, calculatedHeight);
+				
+				setMaximumSize(d);
+//				setPreferredSize(d);
+//				setMinimumSize(d);
+				
+				sideBarOwner.setPreferredSize(d);
 				
 				
-				setSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-				validate();
-				contentPane.setSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
+//				setSize(d);
+//				validate();
+//				contentPane.setSize(d);
 				contentPane.setVisible(true);
 				revalidate();
-				updateUI();
+//				updateUI();
 				
 			}else {
-				calculatedHeight = calculatedHeight;
 				setMaximumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-				setPreferredSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-				setMinimumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-				setSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
-				
+//				setPreferredSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
+//				setMinimumSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
+//				setSize(new Dimension(Integer.MAX_VALUE, calculatedHeight));
+//				
 				contentPane.setVisible(true);
 				revalidate();
 
@@ -214,10 +216,21 @@ public class SidebarSection extends JPanel {
 			anim.setEndValue(minComponentHeight);
 			anim.start();
 		}else {
-			setMaximumSize(new Dimension(Integer.MAX_VALUE, titlePanel.getPreferredSize().height));
-			contentPane.setVisible(false);
-			revalidate();
-			printDimensions();
+			
+			if (sideBarOwner.thisMode == SideBarMode.INNER_LEVEL) {
+				setMaximumSize(new Dimension(Integer.MAX_VALUE, titlePanel.getPreferredSize().height));
+				contentPane.setVisible(false);
+				revalidate();
+				printDimensions();				
+				
+			}else{
+				setMaximumSize(new Dimension(Integer.MAX_VALUE, titlePanel.getPreferredSize().height));
+				contentPane.setVisible(false);
+				revalidate();
+				printDimensions();				
+			}
+
+			
 		}
 	}
 

@@ -55,9 +55,9 @@ public class SidebarAnimation extends Animation{
 		sideBarSection.contentPane.setVisible(true);
 		sideBarSection.revalidate();
 		
-		System.out.println("sideBarSection height " + sideBarSection.getSize().height);
-		System.out.println("sideBarSection titlePanel height " + sideBarSection.titlePanel.getSize().height);
-		System.out.println("sideBarSection.contentPane height " + sideBarSection.contentPane.getSize().height);
+		System.out.println("- sideBarSection height " + sideBarSection.getSize().height);
+		System.out.println("- sideBarSection titlePanel height " + sideBarSection.titlePanel.getSize().height);
+		System.out.println("- sideBarSection.contentPane height " + sideBarSection.contentPane.getSize().height);
 		
 	}
 	
