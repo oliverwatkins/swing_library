@@ -42,57 +42,39 @@ public class SliderTester extends JFrame{
 	
 	public static JPanel getPanel() {
 		
-		JPanel p = new JPanel(new BorderLayout());
+		Icon iconMail24 = new ImageIcon("src/main/resource/img/Mail/Mail_24x24.png");
+		Icon iconMail16 = new ImageIcon("src/main/resource/img/Mail/Mail_16x16.png");
+		Icon iconCal24 = new ImageIcon("src/main/resource/img/Calendar/Calendar_24x24.png");
+		Icon iconGlobe24 = new ImageIcon("src/main/resource/img/Globe/Globe_24x24.png");
+		
+		
+		JPanel mainPanel = new JPanel(new BorderLayout());
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
 		JPanel listPanel = new JPanel(new BorderLayout());
 		
-		SideBar sideBar = new SideBar(SideBar.SideBarMode.TOP_LEVEL, true, 300, false);
+		SideBar sideBar = new SideBar(SideBarMode.TOP_LEVEL, true, 300, true);
 
 		JTree tree = new JTree();
 		
-		Icon i1 = new ImageIcon("src/main/resource/img/Calendar/Calendar_24x24.png");
 		
-		SidebarSection ss1 = new SidebarSection(sideBar, "Calendars", "JTree", tree, i1);
+		
+		SidebarSection ss1 = new SidebarSection(sideBar, "Calendars", tree, iconCal24);
 		sideBar.addSection(ss1);
 
+		SideBar innerSideBar = new SideBar(SideBarMode.INNER_LEVEL, true, -1, true);
 		
-		DefaultTableModel tModel = new DefaultTableModel(4,5);
-		tModel.setValueAt("Einstein", 0, 0);
-		tModel.setValueAt("Plato", 1, 0);
-		tModel.setValueAt("Nietsche", 2, 0);
-		
-		JTable table = new JTable(tModel);
 
-		SideBar innerSideBar = new SideBar(SideBarMode.INNER_LEVEL, true, -1, false);
-		
-		Icon i2 = new ImageIcon("src/main/resource/img/Mail/Mail_24x24.png");
 
-		Icon smallMailIcon = new ImageIcon("src/main/resource/img/Mail/Mail_16x16.png");
-
-		innerSideBar.add(new SidebarSection(innerSideBar, "American Partners", "JTree", getInner1(), smallMailIcon));
-		innerSideBar.add(new SidebarSection(innerSideBar, "Internal", "JTree", getInner2(), smallMailIcon));
-		innerSideBar.add(new SidebarSection(innerSideBar, "Promotions", "JTree", getInner3(), smallMailIcon));
+		innerSideBar.addSection(new SidebarSection(innerSideBar, "American Partners", getInner1(), iconMail16));
+		innerSideBar.addSection(new SidebarSection(innerSideBar, "Internal", getInner2(), iconMail16));
+		innerSideBar.addSection(new SidebarSection(innerSideBar, "Promotions", getInner3(), iconMail16));
 		
-		SidebarSection ss2 = new SidebarSection(sideBar, "Mail Groups", "JTable", innerSideBar, i2);
+		SidebarSection ss2 = new SidebarSection(sideBar, "Mail Groups",  innerSideBar, iconMail24);
 		sideBar.addSection(ss2);
-		
-		//test
 
-		DefaultListModel<String> model = new DefaultListModel<String>();
-		model.add(0, "Bill Gates");
-		model.add(1, "Steven Spielberg");
-		model.add(2, "Donald Trump");
-		model.add(3, "Steve Jobs");		
-		 
-		JList<String> list = new JList<String>();
-		
-		list.setModel(model);
-
-		Icon i3 = new ImageIcon("src/main/resource/img/Globe/Globe_24x24.png");
-
-		SidebarSection ss3 = new SidebarSection(sideBar, "Logistics Partners", "JList", list, i3);
+		SidebarSection ss3 = new SidebarSection(sideBar, "Logistics Partners", getInner4(), iconGlobe24);
 		sideBar.addSection(ss3);
 		
 		listPanel.add(sideBar, BorderLayout.WEST);
@@ -100,12 +82,12 @@ public class SliderTester extends JFrame{
 		
 		tabbedPane.add("Slider Bar", listPanel);
 		
-		p.add(tabbedPane);
-		return p;
+		mainPanel.add(tabbedPane);
+		return mainPanel;
 	}
 
 
-	private static JComponent getInner2() {
+	private static JList<String> getInner4() {
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		model.add(0, "Bill Gates");
 		model.add(1, "Steven Spielberg");
@@ -115,6 +97,12 @@ public class SliderTester extends JFrame{
 		JList<String> list = new JList<String>();
 		
 		list.setModel(model);
+		return list;
+	}
+
+
+	private static JComponent getInner2() {
+		JList<String> list = getInner4();
 		return list;
 	}
 	

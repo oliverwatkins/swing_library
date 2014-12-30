@@ -29,21 +29,14 @@ public class SideBar extends JPanel {
 		this.thisMode = mode;
 		this.animate = animate;
 		
-		
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		setLayout(boxLayout);
-//		setMinimumSize(new Dimension(0, 0));
-		if (preferredWidth != -1)
-			setPreferredSize(new Dimension(preferredWidth, 1));
-		else
-			setPreferredSize(new Dimension(preferredWidth, 10));
 		
+		setPreferredSize(new Dimension(preferredWidth, getPreferredSize().height));
 		
 		setFocusable(false);
 		
-		// collapse all sections
-		// expand first section
 		revalidate();
 	}
 	

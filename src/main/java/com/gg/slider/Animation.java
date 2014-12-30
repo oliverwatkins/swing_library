@@ -89,10 +89,6 @@ public abstract class Animation implements ActionListener {
 		//replace old ctm with new one.
 		this.startMillis = ctm;
 		
-		
-//		System.out.println("startValue : " + startValue + " endValue : " + endValue + " value : " + value + " valuePerMillis = " + valuePerMilli + " millisPassed = " + millisPassed + " startMillis  : " + startMillis);
-		
-		
 		if (startValue < endValue && value >= endValue) {
 			//System.out.println("animation stops. millis elapsed: "+(int)millisPassed);
 			value = Math.min(value,endValue);
