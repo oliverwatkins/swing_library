@@ -28,11 +28,11 @@ import javax.swing.table.TableCellRenderer;
 
 
 /**
+ * TalbeRowUtilities. Utility for adding a row column to a JTable
  * 
  * @author Oliver Watkins
- *
  */
-public class TableUtilities {
+public class TableRowUtilities {
 
 	/**
 	 * Adds a number column in the row header of the scrollpane, to match rows
@@ -63,7 +63,7 @@ public class TableUtilities {
 				JTableHeader tableHeader = (JTableHeader) userTable.getTableHeader();
 				scrollPane.setColumnHeaderView(tableHeader);
 
-				final JTable rowHeadersTable = new JTable(new TableUtilities().new RowHeadersTableModel(userTable.getModel()
+				final JTable rowHeadersTable = new JTable(new TableRowUtilities().new RowHeadersTableModel(userTable.getModel()
 						.getRowCount(), startingNumber));
 				
 				// rowHeadersTable.getModel().addTableModelListener()
@@ -166,7 +166,7 @@ public class TableUtilities {
 
 				rowHeadersTable.setSelectionMode(userTable.getSelectionModel().getSelectionMode());
 
-				new TableUtilities().new TableListener(rowHeadersTable, userTable);
+				new TableRowUtilities().new TableListener(rowHeadersTable, userTable);
 			}
 		}
 	}
