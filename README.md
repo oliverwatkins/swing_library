@@ -29,4 +29,10 @@ http://blue-walrus.com/2014/12/row-number-column-in-jtable/
 
 At a fixed number column to a JTable. Makes it look like an Excel Sheet.
 
+Table Renderer :
+----------------
+http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
+
+Takes a table row in a JTable and displays it in a dialog
+
 
