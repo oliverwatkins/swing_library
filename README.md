@@ -36,3 +36,20 @@ http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
 Takes a table row in a JTable and displays it in a dialog
 
 
+Simple Login Dialog :
+---------------------
+http://blue-walrus.com/2015/01/simple-login-dialog-in-java-swing/
+
+Exception Dialog :
+------------------
+http://blue-walrus.com/2015/01/swing-error-dialog-with-exception-displayer/
+
+Display an exception inside your error dialog
+
+
+
+
+
+
+
+
