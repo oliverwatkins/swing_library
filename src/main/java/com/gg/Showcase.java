@@ -16,6 +16,7 @@ import com.gg.tabledialog.DialogTableTester;
 import com.gg.tablerownumbers.TableRowNumberTester;
 
 /**
+ * 
  * THe frame contains all components visible in application such as search panel
  * and the table.
  */
