@@ -17,19 +17,20 @@ import javax.swing.UIManager;
  */
 
 public class ArrowPanel extends JPanel implements SwingConstants{
-
+	
+	private static final long serialVersionUID = 1L;
+	
 	protected int direction;
-
+	
 	private Color shadow;
 	private Color darkShadow;
 	private Color highlight;
-
+	
 	public ArrowPanel(int direction) {
 		this(direction, UIManager.getColor("control"), 
-				UIManager
-				.getColor("controlShadow"), UIManager
-				.getColor("controlDkShadow"), UIManager
-				.getColor("controlLtHighlight"));
+				UIManager.getColor("controlShadow"),
+				UIManager.getColor("controlDkShadow"),
+				UIManager.getColor("controlLtHighlight"));
 	}
 	
 	
@@ -70,7 +71,8 @@ public class ArrowPanel extends JPanel implements SwingConstants{
 	public void setDirection(int dir) {
 		direction = dir;
 	}
-
+	
+	@Override
 	public void paint(Graphics g) {
 		Color origColor;
 		int w, h, size;
@@ -91,8 +93,7 @@ public class ArrowPanel extends JPanel implements SwingConstants{
 		// Draw the arrow
 		size = Math.min((h - 4) / 3, (w - 4) / 3);
 		size = Math.max(size, 2);
-		paintTriangle(g, (w - size) / 2, (h - size) / 2, size, direction,
-				false);
+		paintTriangle(g, (w - size) / 2, (h - size) / 2, size, direction, false);
 
 		g.setColor(origColor);
 	}
@@ -100,8 +101,7 @@ public class ArrowPanel extends JPanel implements SwingConstants{
 	/**
 	 * Paints a triangle.
 	 */
-	public void paintTriangle(Graphics g, int x, int y, int size,
-			int direction, boolean isEnabled) {
+	public void paintTriangle(Graphics g, int x, int y, int size, int direction, boolean isEnabled) {
 		Color oldColor = g.getColor();
 		int mid, i, j;
 

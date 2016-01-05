@@ -8,13 +8,12 @@ import javax.swing.JPanel;
 
 public class SideBar extends JPanel {
 	
-	//The preferred initial width of the side bar 
-	private static int PREFERRED_WIDTH = 300;
+	private static final long serialVersionUID = 1L;
 	
-	// box layout to contain side bar sections arranged vertically
+	/** box layout to contain side bar sections arranged vertically */
 	private BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 	
-	// the currently expanded section 
+	/** the currently expanded section */
 	private SidebarSection currentSection = null;
 
 	SideBarMode thisMode;
