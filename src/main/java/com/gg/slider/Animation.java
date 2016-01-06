@@ -6,26 +6,20 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 
-/**
- * 
- * test
- * 
- */
-
 public abstract class Animation implements ActionListener {
 
-	//start value (typically in pixels)
+	/** start value (typically in pixels) */
 	protected int startValue = 0;
-	//end value (typically in pixels)
+	/** end value (typically in pixels) */
 	protected int endValue = 0;
-	//duration over which the animation takes place
+	/** duration over which the animation takes place */
 	protected long durationMillis = 0;
 
 	
-	//a value (difference of start and end values) that corresponds to value per millisecond
+	/** A value (difference of start and end values) that corresponds to value per millisecond */
 	protected double valuePerMilli = 0.0;
 	
-	//The ctm of the last performed animation operation
+	/** The ctm of the last performed animation operation */
 	protected long startMillis;
 	
 	protected Timer timer;
@@ -40,12 +34,11 @@ public abstract class Animation implements ActionListener {
 	 * @param durationMillis
 	 */
 	public Animation (int startValue, int endValue, int durationMillis) {
-
 		this.startValue = startValue;
 		this.endValue = endValue;
 		this.durationMillis = durationMillis;
 		
-		//create the value per millis.
+		// create the value per millis.
 		this.valuePerMilli = ((double)(endValue - startValue)) / ((double)durationMillis);
 	}
 	
@@ -66,23 +59,22 @@ public abstract class Animation implements ActionListener {
 	public Animation(int durationMs) {
 		this.durationMillis = durationMs;
 	}
-
+	
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
-		
 		//get ctm
 		long ctm = System.currentTimeMillis();
 		
 		//get difference of this ctm with the last ctm
 		double millisPassed = (double)(ctm-startMillis);
 		
-		/**
-		 * This may be 0 if millisPassed is small enough
-		 */
+		// This may be 0 if millisPassed is small enough
 		double i = (double)(millisPassed * valuePerMilli);
-		if (i==0)
+		if (i==0) {
 			System.err.println("WARNING: Animation is incrementing by zero... potential infinite loop");
+			i++;
 //			throw new RuntimeException("CRITICAL ERROR : Animation broken : incrementing by zero... so infinite loop");
+		}
 		
 		value += i;
 		
@@ -126,7 +118,6 @@ public abstract class Animation implements ActionListener {
 	/**
 	 * Optional starting method for an animation. Ie. before animation commences code to initialise
 	 * the animation can be placed here.
-	 * 
 	 */
 	protected void starting () {
 	}

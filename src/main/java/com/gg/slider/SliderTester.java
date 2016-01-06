@@ -1,9 +1,7 @@
 package com.gg.slider;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,30 +11,28 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JTree;
-import javax.swing.table.DefaultTableModel;
 
 import com.gg.slider.SideBar.SideBarMode;
 
 
 public class SliderTester extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
+	
 	public SliderTester(){
 		
-		
 	}
-
+	
 	
 	public static void main (String[] args) {
-		
 		SliderTester t = new SliderTester();
 		
-		
+		t.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		t.setSize(500, 600);
-		t.add(t.getPanel());
+		t.add(SliderTester.getPanel());
 		t.setVisible(true);
-		
 	}
 	
 	
@@ -67,7 +63,10 @@ public class SliderTester extends JFrame{
 		
 
 
-		innerSideBar.addSection(new SidebarSection(innerSideBar, "American Partners", getInner1(), iconMail16));
+//		innerSideBar.addSection(new SidebarSection(innerSideBar, "American Partners", getInner1(), iconMail16));
+		JPanel ap = new JPanel(new BorderLayout());
+		ap.add(new JTextField("American Partners"));
+		innerSideBar.addSection(new SidebarSection(innerSideBar, ap, getInner1(), iconMail16));
 		innerSideBar.addSection(new SidebarSection(innerSideBar, "Internal", getInner2(), iconMail16));
 		innerSideBar.addSection(new SidebarSection(innerSideBar, "Promotions", getInner3(), iconMail16));
 		

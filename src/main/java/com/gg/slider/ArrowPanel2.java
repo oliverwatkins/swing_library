@@ -9,32 +9,26 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class ArrowPanel2 extends JPanel implements SwingConstants{
+	
+	private static final long serialVersionUID = 1L;
+	
 	protected int direction;
-
-	private Color shadow;
-	private Color darkShadow;
-	private Color highlight;
 	
 	public ArrowPanel2(int direction) {
 		this.direction = direction;
 	}
 
-
+	@Override
 	public void paint(Graphics g) {
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
 		Color origColor;
-		int w, h, size;
+		int w, h;
 
 		w = getSize().width;
 		h = getSize().height;
 		origColor = g2.getColor();
-		
-		
-		
-		
-		
 
 		g2.fillRect(1, 1, w - 2, h - 2);
 		g2.setColor(Color.RED);
