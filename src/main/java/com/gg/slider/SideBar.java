@@ -2,6 +2,8 @@ package com.gg.slider;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -36,14 +38,33 @@ public class SideBar extends JPanel {
 		
 		setFocusable(false);
 		
+        this.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+            	resize();
+            }
+        });
+		
 		revalidate();
 	}
 	
-	public void addSection(SidebarSection newSection) {
-		add(newSection);
-		
-		newSection.collapse(false);
+    public void resize() {
+    	currentSection.setMaximumSize(new Dimension(Integer.MAX_VALUE, this.getHeight()));
+    	currentSection.contentPane.setVisible(true);
+    	currentSection.revalidate();
 	}
+	
+    public void addSection(SidebarSection newSection, boolean collapse) {
+ 		add(newSection);
+ 		if(collapse){
+             newSection.collapse(false);
+         }else{
+             setCurrentSection(newSection);
+         }
+ 	}
+    
+    public void addSection(SidebarSection newSection) {
+    	addSection(newSection, true);
+ 	}
 	
 	public boolean isCurrentExpandedSection(SidebarSection section) {
 		return (section != null) && (currentSection != null)
