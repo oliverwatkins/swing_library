@@ -92,7 +92,7 @@ public class Showcase extends JFrame {
 	public static void main(String[] s2) throws Exception {
 
 		Showcase s = new Showcase();
-		s.setSize(400, 400);
+		s.setSize(600, 600);
 
 		s.setVisible(true);
 

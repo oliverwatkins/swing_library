@@ -3,6 +3,7 @@ package com.gg.layout;
 import static javax.swing.BoxLayout.*;
 import java.awt.*;
 import java.beans.ConstructorProperties;
+import java.io.Serializable;
 import javax.swing.BoxLayout;
 
 /**
@@ -13,32 +14,34 @@ import javax.swing.BoxLayout;
  * remaining space at the bottom or at the right will be left empty.
  * 
  * Their other dimension will be maximized like the BoxLayout does and is guaranteed to correspond to the parent's size.
- * 
+ *
  * @author piegames
  */
-public class BoxFlowLayout implements LayoutManager {
+public class BoxFlowLayout implements LayoutManager, Serializable {
+
+	private static final long	serialVersionUID	= -1510756179837815741L;
 
 	/**
 	 * This value indicates that all components should be left-justified on horizontal alignment and top-justified on vertical alignment.
 	 */
-	public static final int	LEADING		= 0;
+	public static final int		LEADING				= 0;
 
 	/**
 	 * This value indicates that all components should be right-justified on horizontal alignment and bottom-justified on vertical alignment.
 	 */
-	public static final int	TRAILING	= 1;
+	public static final int		TRAILING			= 1;
 
 	/**
 	 * This value indicates that all components should be centered.
 	 */
-	public static final int	CENTER		= 2;
+	public static final int		CENTER				= 2;
 
 	/**
 	 * This value indicates that all components should spread out equally to fill the space. Since their size is not changed by the <code>align</code> setting,
 	 * this will result in gaps between the components. If you don't want them, use a <code>BoxLayout</code> instead since it would reproduce that layout's
 	 * behavior.
 	 */
-	public static final int	SPREAD		= 3;
+	public static final int		SPREAD				= 3;
 
 	/**
 	 * If the components take less space in the axis direction than the parent component provides, this value indicated how they should be placed. It must be
@@ -47,7 +50,7 @@ public class BoxFlowLayout implements LayoutManager {
 	 * @see #getAlign()
 	 * @see #setAlign(int)
 	 */
-	protected int			align;
+	protected int				align;
 
 	/**
 	 * Acts like the axis of a {@link BoxLayout}.
@@ -55,7 +58,7 @@ public class BoxFlowLayout implements LayoutManager {
 	 * @see #getAxis()
 	 * @see #setAxis(int)
 	 */
-	protected int			axis;
+	protected int				axis;
 
 	/**
 	 * The gap between two components acts mostly like <code>vgap</code> in the {@link FlowLayout} if the alignment is horizontal and like <code>hgap</code> if
@@ -65,7 +68,7 @@ public class BoxFlowLayout implements LayoutManager {
 	 * @see #getGap()
 	 * @see #setGap(int)
 	 */
-	protected int			gap;
+	protected int				gap;
 
 	/**
 	 * Creates a new <code>BoxFlowLayout</code> that will lay out components along the vertical axis with a 5 units gap between components and
@@ -118,10 +121,11 @@ public class BoxFlowLayout implements LayoutManager {
 	 * 
 	 * @param align the new value
 	 * @throws IllegalArgumentException if the new value is not one of the above
+	 * @see #align
 	 */
 	public void setAlign(int align) {
 		if (align < 0 || align > 3)
-			throw new IllegalArgumentException("Invalid align");
+			throw new IllegalArgumentException("Invalid align: " + align);
 		this.align = align;
 	}
 
@@ -145,7 +149,7 @@ public class BoxFlowLayout implements LayoutManager {
 	 */
 	public void setGap(int gap) {
 		if (gap < 0)
-			throw new IllegalArgumentException("Invalid gap");
+			throw new IllegalArgumentException("Invalid gap: " + align);
 		this.gap = gap;
 	}
 
@@ -166,7 +170,7 @@ public class BoxFlowLayout implements LayoutManager {
 	 */
 	public void setAxis(int axis) {
 		if (axis < 0 || axis > 3)
-			throw new IllegalArgumentException("Invalid axis");
+			throw new IllegalArgumentException("Invalid axis: " + axis);
 		this.axis = axis;
 	}
 
