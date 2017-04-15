@@ -9,19 +9,22 @@ public class LayoutTester {
 	public static JPanel getPanel() {
 		final JPanel ret = new JPanel(new BorderLayout());
 		JPanel top = new JPanel();
-		final JComboBox<String> comboBox = new JComboBox<>(new String[] { "BoxFlowLayout", "CoordGridLayout", "CenteredLayout" });
+		final JComboBox<String> comboBox = new JComboBox<>(new String[] { "BoxFlowLayout", "CoordGridLayout", "CenteredLayout", "WrapLayout" });
 		comboBox.addActionListener(e -> {
 			ret.removeAll();
 			ret.add(top, BorderLayout.NORTH);
 			switch (comboBox.getSelectedIndex()) {
 				case 0:
-					ret.add(getBoxFlowPanel(), BorderLayout.SOUTH);
+					ret.add(getBoxFlowPanel(), BorderLayout.CENTER);
 					break;
 				case 1:
-					ret.add(getCoordGridPanel(), BorderLayout.SOUTH);
+					ret.add(getCoordGridPanel(), BorderLayout.CENTER);
 					break;
 				case 2:
-					ret.add(getCenteredPanel(), BorderLayout.SOUTH);
+					ret.add(getCenteredPanel(), BorderLayout.CENTER);
+					break;
+				case 3:
+					ret.add(getWrapLayout(), BorderLayout.CENTER);
 					break;
 			}
 			ret.revalidate();
@@ -29,7 +32,24 @@ public class LayoutTester {
 		});
 		top.add(comboBox);
 		ret.add(top, BorderLayout.NORTH);
-		ret.add(getBoxFlowPanel(), BorderLayout.SOUTH);
+		ret.add(getBoxFlowPanel(), BorderLayout.CENTER);
+		return ret;
+	}
+
+	public static JPanel getWrapLayout() {
+		JPanel ret = new JPanel();
+		ret.setLayout(new WrapLayout());
+		ret.add(new JLabel("Taken from: "));
+		ret.add(new JEditorPane("html", "https://tips4java.wordpress.com/2008/11/06/wrap-layout/"));
+		ret.add(new JButton("button"));
+		ret.add(new JLabel("select: "));
+		ret.add(new JComboBox<>(new String[] { "a", "b", "c" }));
+		ret.add(new JLabel("progress: "));
+		ret.add(new JProgressBar());
+		ret.add(new JLabel("slider: "));
+		ret.add(new JSlider());
+		ret.add(new JLabel("password: "));
+		ret.add(new JPasswordField(10));
 		return ret;
 	}
 
