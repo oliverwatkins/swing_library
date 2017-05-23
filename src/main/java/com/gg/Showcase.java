@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import com.gg.calculation.CalculationTester;
 import com.gg.expander.ExpanderTester;
-import com.gg.filtertree.FilterTreeTester;
+import com.gg.filter.FilterComponentTester;
 import com.gg.layout.LayoutTester;
 import com.gg.slider.SliderTester;
 import com.gg.tabledialog.DialogTableTester;
@@ -20,6 +20,8 @@ import com.gg.tablerownumbers.TableRowNumberTester;
  */
 
 public class Showcase extends JFrame {
+
+	private static final long serialVersionUID = -7860751063126147788L;
 
 	public Showcase() throws Exception {
 
@@ -67,7 +69,7 @@ public class Showcase extends JFrame {
 
 		tabbedPane.add("Expander", ExpanderTester.getPanel());
 
-		tabbedPane.add("Filter Tree", FilterTreeTester.getPanel());
+		tabbedPane.add("Filter Tree/List", FilterComponentTester.getPanel());
 
 		tabbedPane.add("Slider", SliderTester.getPanel());
 
