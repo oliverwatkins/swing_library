@@ -6,6 +6,11 @@ import java.util.Objects;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
+/**
+ * A default renderer for lists with a {@link FilterListModel}. It extends the {@link DefaultListCellRenderer} by marking all chars that should be highlighted
+ * according to the {@link ComponentFilter} that is currently used in bold. If the flag {@code #highlightAll} is set, the whole element will be displayed bold
+ * if at least one character should be highlighted.
+ */
 public class FilterListCellRenderer extends DefaultListCellRenderer {
 
 	private static final long		serialVersionUID	= 4973941658469836335L;

@@ -6,6 +6,11 @@ import java.util.Objects;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+/**
+ * A default renderer for trees with a {@link FilterTreeModel}. It extends the {@link DefaultTreeCellRenderer} by marking all chars that should be highlighted
+ * according to the {@link ComponentFilter} that is currently used in bold. If the flag {@code #highlightAll} is set, the whole element will be displayed bold
+ * if at least one character should be highlighted.
+ */
 public class FilterTreeCellRenderer extends DefaultTreeCellRenderer {
 
 	private static final long	serialVersionUID	= 5742895132682024835L;

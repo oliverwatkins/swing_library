@@ -9,6 +9,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.tree.TreeNode;
 
+/**
+ * This panel contains a tree embedded in a scroll pane and a text field on top laid out with a {@code BorderLayout}. The list uses a {@link FilterTreeModel}
+ * and a {@link FilterTreeCellRenderer} and the content of the text field serves as filter text for the tree. Changes in the text field are reflected
+ * automatically in the tree.
+ */
 public class FilterTreePanel extends JPanel {
 
 	private static final long	serialVersionUID	= -1896522436719351893L;
@@ -57,6 +62,10 @@ public class FilterTreePanel extends JPanel {
 		return model;
 	}
 
+	/**
+	 * Force the model to update with the current text in the text field as filter. This is called automatically by all events caught in a
+	 * {@code DocumentListener}, so you shouldn't need to call this normally.
+	 */
 	public void update() {
 		model.setFilterText(filterField.getText());
 		for (int i = 0; i < tree.getRowCount(); i++) {
