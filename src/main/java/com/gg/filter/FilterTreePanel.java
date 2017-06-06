@@ -13,6 +13,8 @@ import javax.swing.tree.TreeNode;
  * This panel contains a tree embedded in a scroll pane and a text field on top laid out with a {@code BorderLayout}. The list uses a {@link FilterTreeModel}
  * and a {@link FilterTreeCellRenderer} and the content of the text field serves as filter text for the tree. Changes in the text field are reflected
  * automatically in the tree.
+ * 
+ * @author piegames
  */
 public class FilterTreePanel extends JPanel {
 

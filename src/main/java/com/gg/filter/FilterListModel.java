@@ -13,6 +13,8 @@ import com.gg.filter.ComponentFilter.NoComponentFilter;
  * {@link ListModel} that allows for filtering of elements. When changing the filter, the whole list will get updated according to the filtering. Accessing data
  * from the model will access the filtered version of the list, but an unfiltered copy is held locally and can be accessed by calling
  * {@link #getUnfilteredData()}.
+ * 
+ * @author piegames
  */
 public class FilterListModel<T> extends AbstractListModel<T> implements FilterableComponentModel {
 

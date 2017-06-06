@@ -6,6 +6,8 @@ package com.gg.filter;
  * 
  * Every class implementing this interface should have two fields for the filter and the filter text. The filter tells how and if elements get filtered, the
  * filter text is the actual search mask. The four methods of this interface should be getters and setters for these fields.
+ * 
+ * @author piegames
  */
 public interface FilterableComponentModel {
 

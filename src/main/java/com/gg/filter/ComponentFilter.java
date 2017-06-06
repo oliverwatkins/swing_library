@@ -8,6 +8,8 @@ import java.util.BitSet;
  * 
  * There are four pre-made filters declared as static subclasses of this class allowing to filter text that starts with, contains, or ends with the filter
  * phrase. But this interface could also be used to filter by date or by more complex patterns if needed.
+ * 
+ * @author piegames
  */
 public interface ComponentFilter {
 

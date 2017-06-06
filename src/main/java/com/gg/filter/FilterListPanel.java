@@ -12,6 +12,8 @@ import javax.swing.event.DocumentListener;
  * This panel contains a list embedded in a scroll pane and a text field on top laid out with a {@code BorderLayout}. The list uses a {@link FilterListModel}
  * and a {@link FilterListCellRenderer} and the content of the text field serves as filter text for the list. Changes in the text field are reflected
  * automatically in the list.
+ * 
+ * @author piegames
  */
 public class FilterListPanel<T> extends JPanel {
 

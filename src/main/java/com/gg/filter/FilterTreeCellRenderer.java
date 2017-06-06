@@ -10,6 +10,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  * A default renderer for trees with a {@link FilterTreeModel}. It extends the {@link DefaultTreeCellRenderer} by marking all chars that should be highlighted
  * according to the {@link ComponentFilter} that is currently used in bold. If the flag {@code #highlightAll} is set, the whole element will be displayed bold
  * if at least one character should be highlighted.
+ * 
+ * @author piegames
  */
 public class FilterTreeCellRenderer extends DefaultTreeCellRenderer {
 

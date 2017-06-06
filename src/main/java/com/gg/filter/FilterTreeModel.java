@@ -11,6 +11,8 @@ import com.gg.filter.ComponentFilter.NoComponentFilter;
  * {@link TreeModel} that allows for filtering of elements. When changing the filter, the whole tree will get updated according to the filtering. Accessing data
  * from the model will access the filtered version of the tree and changes will be reset with the next filter update, but an unfiltered copy is held locally and
  * can be accessed by calling {@link #getUnfilteredRoot()}.
+ * 
+ * @author piegames, Oliver.Watkins
  */
 public class FilterTreeModel extends DefaultTreeModel implements FilterableComponentModel {
 
