@@ -73,7 +73,7 @@ public class FilterComponentTester extends JFrame {
 					filter = new EndsWithComponentFilter(sensitive);
 					break;
 				case 3:
-					filter = new NoComponentFilter();
+					filter = NoComponentFilter.INSTANCE;
 					break;
 			}
 			tree.getTreeModel().setFilter(filter);
@@ -95,7 +95,7 @@ public class FilterComponentTester extends JFrame {
 					filter = new EndsWithComponentFilter(sensitive);
 					break;
 				case 3:
-					filter = new NoComponentFilter();
+					filter = NoComponentFilter.INSTANCE;
 					break;
 			}
 			tree.getTreeModel().setFilter(filter);

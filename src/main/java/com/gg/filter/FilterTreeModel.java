@@ -3,10 +3,18 @@ package com.gg.filter;
 import java.util.Enumeration;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import com.gg.filter.ComponentFilter.NoComponentFilter;
 
-public class FilterTreeModel extends DefaultTreeModel {
+/**
+ * {@link TreeModel} that allows for filtering of elements. When changing the filter, the whole tree will get updated according to the filtering. Accessing data
+ * from the model will access the filtered version of the tree and changes will be reset with the next filter update, but an unfiltered copy is held locally and
+ * can be accessed by calling {@link #getUnfilteredRoot()}.
+ * 
+ * @author piegames, Oliver.Watkins
+ */
+public class FilterTreeModel extends DefaultTreeModel implements FilterableComponentModel {
 
 	private static final long			serialVersionUID	= -8714629473939341376L;
 
@@ -27,34 +35,50 @@ public class FilterTreeModel extends DefaultTreeModel {
 		setFilter(filter);
 	}
 
+	@Override
 	public void setFilter(ComponentFilter filter) {
 		if (filter == null)
-			filter = new NoComponentFilter();
+			filter = NoComponentFilter.INSTANCE;
 		this.filter = filter;
 		updateTree();
 	}
 
+	@Override
 	public ComponentFilter getFilter() {
 		return filter;
 	}
 
+	@Override
 	public void setFilterText(String filterText) {
 		this.filterText = filterText;
 		updateTree();
 	}
 
+	@Override
 	public String getFilterText() {
 		return filterText;
 	}
 
+	/**
+	 * Will set the new root node for the tree. This object will be stored as {@code #unfilteredRoot} that can be requested through {@link #getUnfilteredRoot()}
+	 * . The node will be pruned according to the filter and updated. {@link #getRoot()} will return the filtered root from now.
+	 */
 	@Override
 	public void setRoot(TreeNode root) {
 		this.unfilteredRoot = (DefaultMutableTreeNode) root;
 		updateTree();
 	}
 
+	/**
+	 * Has to be called after the tree changed, or the displayed tree could change due to changes in the filtering. Will be called automatically except for if
+	 * the tree object was changed internally.
+	 */
 	public void updateTree() {
 		super.setRoot(prune(copyNode(unfilteredRoot)));
+	}
+
+	public DefaultMutableTreeNode getUnfilteredRoot() {
+		return unfilteredRoot;
 	}
 
 	/**
