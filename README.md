@@ -1,55 +1,52 @@
+[![](https://jitpack.io/v/piegamesde/swing_library.svg)](https://jitpack.io/#piegamesde/swing_library)
 
 Swing Library
 =============
-This library contains a number of advanced components
+This library contains a number of advanced components and layout managers the Java Swing framework is missing.
 
+# Features
 
-
-Expandable Arcordian :
------------------------
+## Expandable Arcordion
 http://blue-walrus.com/2010/11/expandable-swing-sidebar/
 
 Just like in Outlook, a slider on the left opens and closes menu options
 
-TextArea Expander :
--------------------
+## TextArea Expander :
 http://blue-walrus.com/2011/02/expandable-text-area-in-swing/
 
 This component is a text area which has a special bottom right corner. When a user hovers over this corner, it can be dragged, and the whole component can then have its size readjusted. You see this component a lot in web pages.
 
-Tree Filter :
--------------
+## Tree Filter :
 http://blue-walrus.com/2011/03/swing-filtered-tree-just-like-in-eclipse/
 
 It's a standard JTree with a textfield on the top. As the user types in the textfield, the tree branches are filtered. Quite common in IDEs like Eclipse.
 
-Row Number Columns :
---------------------
+## Row Number Columns :
 http://blue-walrus.com/2014/12/row-number-column-in-jtable/
 
 At a fixed number column to a JTable. Makes it look like an Excel Sheet.
 
-Table Renderer :
-----------------
+## Table Renderer :
 http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
 
 Takes a table row in a JTable and displays it in a dialog
 
 
-Simple Login Dialog :
----------------------
+## Simple Login Dialog :
 http://blue-walrus.com/2015/01/simple-login-dialog-in-java-swing/
 
-Exception Dialog :
-------------------
+## Exception Dialog :
 http://blue-walrus.com/2015/01/swing-error-dialog-with-exception-displayer/
 
 Display an exception inside your error dialog
 
 
+# How to get it
 
+## Download it manually
 
+Download the `.jar` file and optionally the source code and the javadoc from the latest [release] (https://github.com/piegamesde/swing_library/releases) and add it to your class path.
 
+## Using your favourite build system
 
-
-
+Go to [jitpack.io](https://jitpack.io/#piegamesde/swing_library/v1.1), select the build system you are using and paste the code into your configuration.
